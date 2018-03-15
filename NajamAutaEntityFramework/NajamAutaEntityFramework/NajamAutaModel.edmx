@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DobitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Klijenti">
+          <Key>
+            <PropertyRef Name="IdKlijenta" />
+          </Key>
+          <Property Name="IdKlijenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Prezime" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="GodinaRodjenja" Type="int" Nullable="false" />
+          <Property Name="OIB" Type="bigint" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Mobitel" Type="varchar" MaxLength="15" />
+          <Property Name="DozvolaBE" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lokacije">
+          <Key>
+            <PropertyRef Name="IdLokacije" />
+          </Key>
+          <Property Name="IdLokacije" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Zupanija" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Grad" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Adresa" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prikolice">
+          <Key>
+            <PropertyRef Name="IdPrikolice" />
+          </Key>
+          <Property Name="IdPrikolice" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Oblik" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BrojOsovina" Type="int" Nullable="false" />
+          <Property Name="Registracija" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="PotrebaZaBE" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rezervacije">
+          <Key>
+            <PropertyRef Name="IdRezervacije" />
+          </Key>
+          <Property Name="IdRezervacije" Type="int" Nullable="false" />
+          <Property Name="Klijent" Type="int" Nullable="false" />
+          <Property Name="Vozilo" Type="int" Nullable="false" />
+          <Property Name="Prikolica" Type="int" />
+        </EntityType>
+        <EntityType Name="Vozila">
+          <Key>
+            <PropertyRef Name="IdVozila" />
+          </Key>
+          <Property Name="IdVozila" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Marka" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Model" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Godiste" Type="int" Nullable="false" />
+          <Property Name="Gorivo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Registracija" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Kuka" Type="bit" Nullable="false" />
+          <Property Name="Lokacija" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Rezervacije_Klijenti">
+          <End Role="Klijenti" Type="Self.Klijenti" Multiplicity="1" />
+          <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klijenti">
+              <PropertyRef Name="IdKlijenta" />
+            </Principal>
+            <Dependent Role="Rezervacije">
+              <PropertyRef Name="Klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervacije_Prikolice">
+          <End Role="Prikolice" Type="Self.Prikolice" Multiplicity="0..1" />
+          <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prikolice">
+              <PropertyRef Name="IdPrikolice" />
+            </Principal>
+            <Dependent Role="Rezervacije">
+              <PropertyRef Name="Prikolica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervacije_Vozila">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="1" />
+          <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="IdVozila" />
+            </Principal>
+            <Dependent Role="Rezervacije">
+              <PropertyRef Name="Vozilo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vozila_Lokacije">
+          <End Role="Lokacije" Type="Self.Lokacije" Multiplicity="1" />
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lokacije">
+              <PropertyRef Name="IdLokacije" />
+            </Principal>
+            <Dependent Role="Vozila">
+              <PropertyRef Name="Lokacija" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DobitModelStoreContainer">
+          <EntitySet Name="Klijenti" EntityType="Self.Klijenti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lokacije" EntityType="Self.Lokacije" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prikolice" EntityType="Self.Prikolice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rezervacije" EntityType="Self.Rezervacije" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vozila" EntityType="Self.Vozila" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Rezervacije_Klijenti" Association="Self.FK_Rezervacije_Klijenti">
+            <End Role="Klijenti" EntitySet="Klijenti" />
+            <End Role="Rezervacije" EntitySet="Rezervacije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervacije_Prikolice" Association="Self.FK_Rezervacije_Prikolice">
+            <End Role="Prikolice" EntitySet="Prikolice" />
+            <End Role="Rezervacije" EntitySet="Rezervacije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervacije_Vozila" Association="Self.FK_Rezervacije_Vozila">
+            <End Role="Vozila" EntitySet="Vozila" />
+            <End Role="Rezervacije" EntitySet="Rezervacije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vozila_Lokacije" Association="Self.FK_Vozila_Lokacije">
+            <End Role="Lokacije" EntitySet="Lokacije" />
+            <End Role="Vozila" EntitySet="Vozila" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DobitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Klijenti">
+          <Key>
+            <PropertyRef Name="IdKlijenta" />
+          </Key>
+          <Property Name="IdKlijenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prezime" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GodinaRodjenja" Type="Int32" Nullable="false" />
+          <Property Name="OIB" Type="Int64" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobitel" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DozvolaBE" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Rezervacije" Relationship="Self.FK_Rezervacije_Klijenti" FromRole="Klijenti" ToRole="Rezervacije" />
+        </EntityType>
+        <EntityType Name="Lokacije">
+          <Key>
+            <PropertyRef Name="IdLokacije" />
+          </Key>
+          <Property Name="IdLokacije" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Zupanija" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Grad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Vozila" Relationship="Self.FK_Vozila_Lokacije" FromRole="Lokacije" ToRole="Vozila" />
+        </EntityType>
+        <EntityType Name="Prikolice">
+          <Key>
+            <PropertyRef Name="IdPrikolice" />
+          </Key>
+          <Property Name="IdPrikolice" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Oblik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BrojOsovina" Type="Int32" Nullable="false" />
+          <Property Name="Registracija" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PotrebaZaBE" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Rezervacije" Relationship="Self.FK_Rezervacije_Prikolice" FromRole="Prikolice" ToRole="Rezervacije" />
+        </EntityType>
+        <EntityType Name="Rezervacije">
+          <Key>
+            <PropertyRef Name="IdRezervacije" />
+          </Key>
+          <Property Name="IdRezervacije" Type="Int32" Nullable="false" />
+          <Property Name="Klijent" Type="Int32" Nullable="false" />
+          <Property Name="Vozilo" Type="Int32" Nullable="false" />
+          <Property Name="Prikolica" Type="Int32" />
+          <NavigationProperty Name="Klijenti" Relationship="Self.FK_Rezervacije_Klijenti" FromRole="Rezervacije" ToRole="Klijenti" />
+          <NavigationProperty Name="Prikolice" Relationship="Self.FK_Rezervacije_Prikolice" FromRole="Rezervacije" ToRole="Prikolice" />
+          <NavigationProperty Name="Vozila" Relationship="Self.FK_Rezervacije_Vozila" FromRole="Rezervacije" ToRole="Vozila" />
+        </EntityType>
+        <EntityType Name="Vozila">
+          <Key>
+            <PropertyRef Name="IdVozila" />
+          </Key>
+          <Property Name="IdVozila" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Marka" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Godiste" Type="Int32" Nullable="false" />
+          <Property Name="Gorivo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Registracija" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Kuka" Type="Boolean" Nullable="false" />
+          <Property Name="Lokacija" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lokacije" Relationship="Self.FK_Vozila_Lokacije" FromRole="Vozila" ToRole="Lokacije" />
+          <NavigationProperty Name="Rezervacije" Relationship="Self.FK_Rezervacije_Vozila" FromRole="Vozila" ToRole="Rezervacije" />
+        </EntityType>
+        <Association Name="FK_Rezervacije_Klijenti">
+          <End Role="Klijenti" Type="Self.Klijenti" Multiplicity="1" />
+          <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klijenti">
+              <PropertyRef Name="IdKlijenta" />
+            </Principal>
+            <Dependent Role="Rezervacije">
+              <PropertyRef Name="Klijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vozila_Lokacije">
+          <End Role="Lokacije" Type="Self.Lokacije" Multiplicity="1" />
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lokacije">
+              <PropertyRef Name="IdLokacije" />
+            </Principal>
+            <Dependent Role="Vozila">
+              <PropertyRef Name="Lokacija" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervacije_Prikolice">
+          <End Role="Prikolice" Type="Self.Prikolice" Multiplicity="0..1" />
+          <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prikolice">
+              <PropertyRef Name="IdPrikolice" />
+            </Principal>
+            <Dependent Role="Rezervacije">
+              <PropertyRef Name="Prikolica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervacije_Vozila">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="1" />
+          <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="IdVozila" />
+            </Principal>
+            <Dependent Role="Rezervacije">
+              <PropertyRef Name="Vozilo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NajamAutaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Klijenti" EntityType="Self.Klijenti" />
+          <EntitySet Name="Lokacije" EntityType="Self.Lokacije" />
+          <EntitySet Name="Prikolice" EntityType="Self.Prikolice" />
+          <EntitySet Name="Rezervacije" EntityType="Self.Rezervacije" />
+          <EntitySet Name="Vozila" EntityType="Self.Vozila" />
+          <AssociationSet Name="FK_Rezervacije_Klijenti" Association="Self.FK_Rezervacije_Klijenti">
+            <End Role="Klijenti" EntitySet="Klijenti" />
+            <End Role="Rezervacije" EntitySet="Rezervacije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vozila_Lokacije" Association="Self.FK_Vozila_Lokacije">
+            <End Role="Lokacije" EntitySet="Lokacije" />
+            <End Role="Vozila" EntitySet="Vozila" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervacije_Prikolice" Association="Self.FK_Rezervacije_Prikolice">
+            <End Role="Prikolice" EntitySet="Prikolice" />
+            <End Role="Rezervacije" EntitySet="Rezervacije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervacije_Vozila" Association="Self.FK_Rezervacije_Vozila">
+            <End Role="Vozila" EntitySet="Vozila" />
+            <End Role="Rezervacije" EntitySet="Rezervacije" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DobitModelStoreContainer" CdmEntityContainer="NajamAutaEntities">
+          <EntitySetMapping Name="Klijenti">
+            <EntityTypeMapping TypeName="DobitModel.Klijenti">
+              <MappingFragment StoreEntitySet="Klijenti">
+                <ScalarProperty Name="IdKlijenta" ColumnName="IdKlijenta" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="GodinaRodjenja" ColumnName="GodinaRodjenja" />
+                <ScalarProperty Name="OIB" ColumnName="OIB" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobitel" ColumnName="Mobitel" />
+                <ScalarProperty Name="DozvolaBE" ColumnName="DozvolaBE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lokacije">
+            <EntityTypeMapping TypeName="DobitModel.Lokacije">
+              <MappingFragment StoreEntitySet="Lokacije">
+                <ScalarProperty Name="IdLokacije" ColumnName="IdLokacije" />
+                <ScalarProperty Name="Zupanija" ColumnName="Zupanija" />
+                <ScalarProperty Name="Grad" ColumnName="Grad" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prikolice">
+            <EntityTypeMapping TypeName="DobitModel.Prikolice">
+              <MappingFragment StoreEntitySet="Prikolice">
+                <ScalarProperty Name="IdPrikolice" ColumnName="IdPrikolice" />
+                <ScalarProperty Name="Oblik" ColumnName="Oblik" />
+                <ScalarProperty Name="BrojOsovina" ColumnName="BrojOsovina" />
+                <ScalarProperty Name="Registracija" ColumnName="Registracija" />
+                <ScalarProperty Name="PotrebaZaBE" ColumnName="PotrebaZaBE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rezervacije">
+            <EntityTypeMapping TypeName="DobitModel.Rezervacije">
+              <MappingFragment StoreEntitySet="Rezervacije">
+                <ScalarProperty Name="IdRezervacije" ColumnName="IdRezervacije" />
+                <ScalarProperty Name="Klijent" ColumnName="Klijent" />
+                <ScalarProperty Name="Vozilo" ColumnName="Vozilo" />
+                <ScalarProperty Name="Prikolica" ColumnName="Prikolica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vozila">
+            <EntityTypeMapping TypeName="DobitModel.Vozila">
+              <MappingFragment StoreEntitySet="Vozila">
+                <ScalarProperty Name="IdVozila" ColumnName="IdVozila" />
+                <ScalarProperty Name="Marka" ColumnName="Marka" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Godiste" ColumnName="Godiste" />
+                <ScalarProperty Name="Gorivo" ColumnName="Gorivo" />
+                <ScalarProperty Name="Registracija" ColumnName="Registracija" />
+                <ScalarProperty Name="Kuka" ColumnName="Kuka" />
+                <ScalarProperty Name="Lokacija" ColumnName="Lokacija" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

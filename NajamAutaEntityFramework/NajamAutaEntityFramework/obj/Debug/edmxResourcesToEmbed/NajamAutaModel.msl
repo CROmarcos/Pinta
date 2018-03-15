@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DobitModelStoreContainer" CdmEntityContainer="NajamAutaEntities">
+    <EntitySetMapping Name="Klijenti">
+      <EntityTypeMapping TypeName="DobitModel.Klijenti">
+        <MappingFragment StoreEntitySet="Klijenti">
+          <ScalarProperty Name="IdKlijenta" ColumnName="IdKlijenta" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="GodinaRodjenja" ColumnName="GodinaRodjenja" />
+          <ScalarProperty Name="OIB" ColumnName="OIB" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobitel" ColumnName="Mobitel" />
+          <ScalarProperty Name="DozvolaBE" ColumnName="DozvolaBE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lokacije">
+      <EntityTypeMapping TypeName="DobitModel.Lokacije">
+        <MappingFragment StoreEntitySet="Lokacije">
+          <ScalarProperty Name="IdLokacije" ColumnName="IdLokacije" />
+          <ScalarProperty Name="Zupanija" ColumnName="Zupanija" />
+          <ScalarProperty Name="Grad" ColumnName="Grad" />
+          <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prikolice">
+      <EntityTypeMapping TypeName="DobitModel.Prikolice">
+        <MappingFragment StoreEntitySet="Prikolice">
+          <ScalarProperty Name="IdPrikolice" ColumnName="IdPrikolice" />
+          <ScalarProperty Name="Oblik" ColumnName="Oblik" />
+          <ScalarProperty Name="BrojOsovina" ColumnName="BrojOsovina" />
+          <ScalarProperty Name="Registracija" ColumnName="Registracija" />
+          <ScalarProperty Name="PotrebaZaBE" ColumnName="PotrebaZaBE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rezervacije">
+      <EntityTypeMapping TypeName="DobitModel.Rezervacije">
+        <MappingFragment StoreEntitySet="Rezervacije">
+          <ScalarProperty Name="IdRezervacije" ColumnName="IdRezervacije" />
+          <ScalarProperty Name="Klijent" ColumnName="Klijent" />
+          <ScalarProperty Name="Vozilo" ColumnName="Vozilo" />
+          <ScalarProperty Name="Prikolica" ColumnName="Prikolica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vozila">
+      <EntityTypeMapping TypeName="DobitModel.Vozila">
+        <MappingFragment StoreEntitySet="Vozila">
+          <ScalarProperty Name="IdVozila" ColumnName="IdVozila" />
+          <ScalarProperty Name="Marka" ColumnName="Marka" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Godiste" ColumnName="Godiste" />
+          <ScalarProperty Name="Gorivo" ColumnName="Gorivo" />
+          <ScalarProperty Name="Registracija" ColumnName="Registracija" />
+          <ScalarProperty Name="Kuka" ColumnName="Kuka" />
+          <ScalarProperty Name="Lokacija" ColumnName="Lokacija" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

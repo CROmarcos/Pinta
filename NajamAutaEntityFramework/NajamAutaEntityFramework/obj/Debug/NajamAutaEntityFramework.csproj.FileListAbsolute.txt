@@ -1,0 +1,17 @@
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\bin\Debug\NajamAutaEntityFramework.exe.config
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\bin\Debug\NajamAutaEntityFramework.exe
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\bin\Debug\NajamAutaEntityFramework.pdb
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\bin\Debug\EntityFramework.dll
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\bin\Debug\EntityFramework.xml
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\obj\Debug\NajamAutaEntityFramework.GlavnaForma.resources
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\obj\Debug\NajamAutaEntityFramework.PopisLokacija.resources
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\obj\Debug\NajamAutaEntityFramework.Properties.Resources.resources
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\obj\Debug\NajamAutaEntityFramework.csproj.GenerateResource.Cache
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\obj\Debug\NajamAutaEntityFramework.csproj.CoreCompileInputs.cache
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\obj\Debug\NajamAutaEntityFramework.exe
+c:\users\marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\obj\Debug\NajamAutaEntityFramework.pdb
+C:\Users\Marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\obj\Debug\NajamAutaEntityFramework.UnosAuta.resources
+C:\Users\Marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\obj\Debug\NajamAutaEntityFramework.csprojResolveAssemblyReference.cache
+C:\Users\Marko\documents\visual studio 2017\Projects\NajamAutaEntityFramework\NajamAutaEntityFramework\obj\Debug\NajamAutaEntityFramework.UnosLokacije.resources
